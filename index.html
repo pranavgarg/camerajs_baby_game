@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Camera</title>
+</head>
+<body>
+<canvas id="webcam">
+
+</canvas>
+<script src="camera.js"></script>
+<script>
+    var images = {
+                'dog':'http://upload.wikimedia.org/wikipedia/commons/8/89/Dog.svg',
+                'elephant':'http://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Certain_Elephant.svg/228px-Certain_Elephant.svg.png' //http://www.misskatecuttables.com/uploads/shopping_cart/7460/large_elephant.png
+                };
+    var ananya_canvas = document.getElementById('webcam');
+    function draw_animal(){
+        var context = ananya_canvas.getContext("2d");
+        img = document.createElement('img');
+        img.src = images['dog'];
+        context.drawImage(img,200,200,100,100);
+        context.font = '40pt Calibri';
+        context.fillStyle = 'blue';
+        context.fillText('Ananya', 100, 100);
+
+    };
+    camera.init({
+        width:600,
+        height:480,
+        fps:40,
+        mirror:false,
+        targetCanvas: ananya_canvas,
+        onFrame:function(canvas) {
+            draw_animal();
+        },
+        onSuccess: function() {
+            // stream succesfully started, yay!
+            draw_animal();
+        },
+
+        onError: function(error) {
+            // something went wrong on initialization
+        },
+
+        onNotSupported: function() {
+            // instruct the user to get a better browser
+        }
+    })
+</script>
+</body>
+</html>
